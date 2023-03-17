@@ -20,11 +20,11 @@ class DeliveriesController < ApplicationController
   def create
     the_delivery = Delivery.new
     the_delivery.description = params.fetch("query_description")
-    the_delivery.arrival_date = params.fetch("query_arrival_date")
-    the_delivery.carrier = params.fetch("query_carrier")
-    the_delivery.tracking_number = params.fetch("query_tracking_number")
-    the_delivery.user_id = params.fetch("query_user_id")
-    the_delivery.status = params.fetch("query_status")
+    the_delivery.arrival_date = params.fetch("query_supposed_to_arrive_on")
+    # the_delivery.carrier = params.fetch("query_carrier")
+    # the_delivery.tracking_number = params.fetch("query_tracking_number")
+    the_delivery.user_id = session.fetch(:user_id)
+    the_delivery.status = params.fetch("query_details")
 
     if the_delivery.valid?
       the_delivery.save
