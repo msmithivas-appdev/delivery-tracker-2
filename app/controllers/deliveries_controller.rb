@@ -4,7 +4,7 @@ class DeliveriesController < ApplicationController
 
     @list_of_deliveries = matching_deliveries.order({ :created_at => :desc })
 
-    render({ :template => "deliveries/index.html.erb" })
+    render({ :template => "deliveries/index2.html.erb" })
   end
 
   def show

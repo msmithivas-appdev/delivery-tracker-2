@@ -1,0 +1,109 @@
+<a href="/">Your todo list</a>
+      |
+      <a href="/edit_user_profile">Edit profile</a>
+      |
+      <a href="/user_sign_out">Sign out</a>
+
+    <div>
+      <h1>
+        Delivery Tracker
+      </h1>
+
+      <p>Know if something gets lost in the mail.</p>
+    </div>
+  <hr>
+
+  
+  <div>
+    <h2>
+      Expecting a package?
+    </h2>
+
+    <form action="/insert_delivery" method="post">
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="supposed_to_arrive_on_box">
+          Supposed to arrive on
+        </label>
+
+        <input type="date" id="supposed_to_arrive_on_box" name="query_supposed_to_arrive_on">
+      </div>
+
+      <div>
+        <label for="details_box">
+          Details
+        </label>
+
+        <textarea id="details_box" name="query_details" rows="3"></textarea>
+      </div>
+
+      <button>
+        Log delivery
+      </button>
+    </form>
+  
+</div>
+
+<hr>
+
+<div class="waiting_on" style="color:lightgoldenrodyellow">
+
+  <h2>Waiting on</h2>
+
+   <ul>
+      <% next_delivery = Delivery.where({:status => "Waiting on"}) %>
+      <% next_delivery.each do |a_delivery| %>
+      
+      <li>
+        <div><%= a_delivery.description %></div>
+
+        <small>
+          <%= "Added " + time_ago_in_words(a_delivery.created_at) + " ago" %>
+
+          <a href="/delete_delivery/<%= a_delivery.id %>">Delete</a>
+        </small>
+      </li>
+      <% end %>
+  </ul>
+
+    
+</div>
+
+
+  
+
+ 
+
+
+<div class="received" style="color:lightgreen">
+
+  <h2>Received</h2>
+
+  <ul>
+     <% next_delivery = Delivery.where({:status => "Received"}) %>
+     <% next_delivery.each do |a_delivery| %>
+
+     <li>
+      
+      <div><%= a_delivery.description %></div>
+
+        <small>
+          <%= "Started " + time_ago_in_words(a_delivery.updated_at) + " ago"%>
+
+          <a href="/delete_delivery/<%= a_delivery.id %>">Delete</a>
+        </small>
+
+      
+      </li>
+    <% end %>
+    </ul>
+  </div>
+      
+  
